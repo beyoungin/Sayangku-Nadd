@@ -256,7 +256,7 @@ body.hasbg .page::before,body.hasbg .page::after{display:none}
 <!-- Modal Lightbox Pop-Up Foto -->
 <div class="photo-modal" id="photoModal" aria-hidden="true">
   <div class="photo-modal-card">
-    <button class="photo-modal-close" id="modalClose" type="button" aria-label="Tutup">×</button>
+    <button class="photo-modal-close" id="modalClose" type="button" aria-label="Tutup">&times;</button>
     <img class="photo-modal-img" id="modalImg" src="" alt="">
     <div class="photo-modal-cap" id="modalCap"></div>
   </div>
@@ -264,7 +264,7 @@ body.hasbg .page::before,body.hasbg .page::after{display:none}
 
 <!-- Pemutar Mini -->
 <div class="mini" id="mini" role="group" aria-label="Pemutar audio">
-  <p class="t" id="mt">—</p><p class="a" id="ma"> </p>
+  <p class="t" id="mt">—</p><p class="a" id="ma">&nbsp;</p>
   <div class="ctl">
     <button class="ib" id="prev" type="button" aria-label="Sebelumnya"><svg viewBox="0 0 24 24"><path d="M7 6v12M18 6l-8 6 8 6z"/></svg></button>
     <button class="ib" id="pp" type="button" aria-label="Putar">
@@ -287,11 +287,11 @@ const CONFIG = {
   to: 'Untuk Nadd',
   from: 'Dari Bii',
   note: [
-    `Hai Nadd,
+    'Hai Nadd,',
     'Terima kasih sudah lahir dan tumbuh jadi diri kamu yang sekarang.',
     'Bagi dunia kamu mungkin merasa beda, tapi buat aku, kamu itu unik dan sangat amat spesial.',
     'Aku bersyukur banget punya kamu di hidupku, persis seperti kamu apa adanya.',
-    'Dengerin mixtape ini ya, karna setiap lagunya selalu selalu bikin aku mikirin kamu terus.',
+    'Dengerin mixtape ini ya, karna setiap lagunya selalu bikin aku mikirin kamu terus.',
     '— bii'
   ],
   flowerImages: ['flower1.png','flower2.png','flower3.png','flower4.png','flower5.png','flower6.png'],
@@ -306,18 +306,13 @@ const CONFIG = {
     { src: 'photo1.jpg', cap: 'ur Eyes' },
     { src: 'photo4.jpg', cap: 'ur Face' },
     { src: 'photo3.jpg', cap: 'my universe' },
-    { src: 'photo2.jpg', cap: 'ur tounge' },
+    { src: 'photo2.jpg', cap: 'ur tongue' },
     { src: 'photo5.jpg', cap: 'ur soul' },
     { src: 'photo6.jpg', cap: 'ur smile' },
     { src: 'photo7.jpg', cap: 'ur hair' },
     { src: 'photo8.jpg', cap: 'ur dress' },
     { src: 'photo9.jpg', cap: 'ur purity' },
     { src: 'photo10.jpg', cap: 'ur behaviour' }
-
-
-
-
-
   ],
   letter: [
     'Hai Nadd,',
@@ -391,7 +386,7 @@ function toast(m) { const t = $('toast'); t.textContent = m; t.classList.add('on
 
 /* ---- Konten & Pemutar ---- */
 $('to').textContent = `${CONFIG.to} — ${CONFIG.from}`;
-$('note').innerHTML = CONFIG.note.map(p => `<p>${p.replace(/[&<>]/g, c => ({ '&': '&', '<': '<', '>': '>' }[c]))}</p>`).join('');
+$('note').innerHTML = CONFIG.note.map(p => `<p>${p.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]))}</p>`).join('');
 $('list').innerHTML = CONFIG.tracks.map((t, i) =>
   `<button class="trk" type="button" data-i="${i}"><span class="no">${String(i + 1).padStart(2, '0')}</span>
    <span class="nm">${t.title}<small>${t.artist}</small></span><span class="pl">${ICON_PLAY}</span></button>`).join('');
@@ -480,7 +475,7 @@ function bloom() {
 }
 
 /* ---- Intro ---- */
-$('ink').innerHTML = CONFIG.letter.map((t, i) => `<p style="--i:${i};--rot:${(Math.random() * .8 - .4).toFixed(2)}deg">${t.replace(/[&<>]/g, c => ({ '&': '&', '<': '<', '>': '>' }[c]))}</p>`).join('');
+$('ink').innerHTML = CONFIG.letter.map((t, i) => `<p style="--i:${i};--rot:${(Math.random() * .8 - .4).toFixed(2)}deg">${t.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]))}</p>`).join('');
 $('go').style.setProperty('--gd', (1.1 + CONFIG.letter.length * .75 + .3) + 's');
 
 $('env').onclick = () => {
@@ -618,7 +613,7 @@ function createScatterPhotos() {
   ];
 
   positions.forEach(async (pos, idx) => {
-    const ph = CONFIG.photos[idx % CONFIG.photos.length];
+    const ph = CONFIG.photos[(idx + 3) % CONFIG.photos.length];
     const f = document.createElement('figure');
     f.className = 'pola scatter empty';
     f.style.top = pos.top;
